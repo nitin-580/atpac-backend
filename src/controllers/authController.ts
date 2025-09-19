@@ -3,7 +3,6 @@ import bcrypt from 'bcrypt'
 import jwt from "jsonwebtoken"
 import Student from '../models/studentModel'
 import dotenv from 'dotenv'
-import { CarTaxiFront } from "lucide-react";
 dotenv.config()
 
 const JWT_SECRET = process.env.JWT_SECRET || "ATPAC"
