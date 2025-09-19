@@ -5,9 +5,7 @@
     "rootDir": "./",
     "outDir": "./dist",
     "esModuleInterop": true,
-    "strict": true,
-    "jsx": "react-jsx",        // ✅ enables new JSX transform
-    "types": ["react", "react-dom"] // ✅ include React types
+    "strict": true
   },
-  "include": ["src", "server.ts"]
+  "include": ["server.ts", "src"]
 }
