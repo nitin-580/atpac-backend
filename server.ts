@@ -6,7 +6,7 @@ import studentRoutes from "./src/routes/studentRoutes";
 import blogsRoutes from "./src/routes/blogsRoutes";
 import cors from "cors";
 import companyRoutes from "./src/routes/companyRoutes";
-
+import contactRoutes from "./src/routes/contactRoutes"
 dotenv.config();
 
 const PORT = process.env.PORT || 5003;
@@ -22,6 +22,8 @@ app.use('/api/auth', authRoutes);
 app.use('/api/students', studentRoutes);
 app.use('/api/blogs', blogsRoutes);
 app.use('/api/companies', companyRoutes);
+app.use('/api/contact', contactRoutes);
+
 
 // MongoDB connection
 mongoose
