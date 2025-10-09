@@ -1,49 +1,34 @@
 import mongoose, { Schema, Document } from "mongoose";
 
-// The updated interface reflecting both placement and internship stats
+// The interface must match the schema fields
 export interface IDepartmentStats extends Document {
   departmentName: string;
   degree: string;
   batchYear: number;
   totalStudents: number;
   eligibleStudents: number;
-
-  // Placement-specific fields
   placementsPlaced: number;
-  unplacedForPlacements: number;
-  placementRate: number;
-
-  // Internship-specific fields
   internshipsPlaced: number;
-  internshipRate: number;
+  unplaced: number; // <-- This property was likely missing or named incorrectly
 }
 
-// The updated Mongoose Schema
 const DepartmentStatsSchema: Schema = new Schema(
   {
     departmentName: { type: String, required: true },
     degree: { type: String, required: true },
-    batchYear: { type: Number, required: true, index: true },
-
-    // Overall student counts
+    batchYear: { type: Number, required: true },
     totalStudents: { type: Number, required: true, default: 0 },
     eligibleStudents: { type: Number, required: true, default: 0 },
-
-    // --- Placement Statistics ---
     placementsPlaced: { type: Number, required: true, default: 0 },
-
-    // --- Internship Statistics ---
     internshipsPlaced: { type: Number, required: true, default: 0 },
-
-    // Calculated fields eligible-placement-internship
     unplaced: { type: Number, required: true, default: 0 },
   },
   {
-    timestamps: true, // Automatically adds createdAt and updatedAt fields
+    timestamps: true,
   }
 );
 
-// Compound index for efficient querying remains the same
+// Unique compound index to act as a primary key
 DepartmentStatsSchema.index(
   { departmentName: 1, degree: 1, batchYear: 1 },
   { unique: true }
