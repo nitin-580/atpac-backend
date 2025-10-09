@@ -2,9 +2,9 @@ import express from "express";
 import {
     getDepartmentStats,
     createDepartmentStat,
-    getDepartmentStatByNameandDegree,
-    updateDepartmentStatByNameandDegree,
-    deleteDepartmentStatByNameandDegree,
+    getDepartmentStat,       // <-- Use this new name
+    updateDepartmentStat,    // <-- Use this new name
+    deleteDepartmentStat,    // <-- Use this new name
 } from "../controllers/departmentStatController"; // Ensure correct path
 
 const router = express.Router();
@@ -14,10 +14,10 @@ router.route("/")
     .get(getDepartmentStats)
     .post(createDepartmentStat);
 
-// Routes for a specific stat, identified by its name in the URL
-router.route("/:departmentName/:degree")
-    .get(getDepartmentStatByNameandDegree)
-    .put(updateDepartmentStatByNameandDegree)
-    .delete(deleteDepartmentStatByNameandDegree);
+// Routes for a specific stat, identified by its unique keys
+router.route("/:departmentName/:degree/:batchYear")
+    .get(getDepartmentStat)
+    .put(updateDepartmentStat)
+    .delete(deleteDepartmentStat);
 
 export default router;
