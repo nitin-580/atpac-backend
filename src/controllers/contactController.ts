@@ -25,32 +25,32 @@ export const createContactMessage = async (req: Request, res: Response) => {
       message,
     });
 
-    // 2. Send an email notification to the admin
-    const adminEmail = process.env.ADMIN_EMAIL;
-    if (adminEmail) {
-      const emailSubject = `New Contact Form Submission from ${name}`;
-      const emailHtml = `
-        <h1>New Contact Message</h1>
-        <p>You have received a new message from your website's contact form.</p>
-        <h2>Details:</h2>
-        <ul>
-          <li><strong>Name:</strong> ${name}</li>
-          <li><strong>Company:</strong> ${companyName}</li>
-          <li><strong>Email:</strong> ${email}</li>
-          <li><strong>Phone:</strong> ${phone || "Not provided"}</li>
-        </ul>
-        <h2>Message:</h2>
-        <p>${message}</p>
-      `;
+    // // 2. Send an email notification to the admin
+    // const adminEmail = process.env.ADMIN_EMAIL;
+    // if (adminEmail) {
+    //   const emailSubject = `New Contact Form Submission from ${name}`;
+    //   const emailHtml = `
+    //     <h1>New Contact Message</h1>
+    //     <p>You have received a new message from your website's contact form.</p>
+    //     <h2>Details:</h2>
+    //     <ul>
+    //       <li><strong>Name:</strong> ${name}</li>
+    //       <li><strong>Company:</strong> ${companyName}</li>
+    //       <li><strong>Email:</strong> ${email}</li>
+    //       <li><strong>Phone:</strong> ${phone || "Not provided"}</li>
+    //     </ul>
+    //     <h2>Message:</h2>
+    //     <p>${message}</p>
+    //   `;
 
-      await sendEmail({
-        to: adminEmail,
-        subject: emailSubject,
-        html: emailHtml,
-      });
-    } else {
-        console.warn("ADMIN_EMAIL not set. Skipping email notification.");
-    }
+    //   await sendEmail({
+    //     to: adminEmail,
+    //     subject: emailSubject,
+    //     html: emailHtml,
+    //   });
+    // } else {
+    //     console.warn("ADMIN_EMAIL not set. Skipping email notification.");
+    // }
 
     res.status(201).json({
       message: "Your message has been received! We will get back to you shortly.",
@@ -87,16 +87,16 @@ export const getAllContactMessages = async (req: Request, res: Response) => {
  * @access  Private/Admin
  */
 export const getContactMessageById = async (req: Request, res: Response) => {
-    // ... (no changes here)
-    try {
-        const contact = await ContactModel.findById(req.params.id);
-        if (!contact) {
-            return res.status(404).json({ message: "Contact message not found." });
-        }
-        res.status(200).json(contact);
-    } catch (error: any) {
-        res.status(500).json({ message: "Server Error", error: error.message });
+  // ... (no changes here)
+  try {
+    const contact = await ContactModel.findById(req.params.id);
+    if (!contact) {
+      return res.status(404).json({ message: "Contact message not found." });
     }
+    res.status(200).json(contact);
+  } catch (error: any) {
+    res.status(500).json({ message: "Server Error", error: error.message });
+  }
 };
 
 
@@ -106,14 +106,14 @@ export const getContactMessageById = async (req: Request, res: Response) => {
  * @access  Private/Admin
  */
 export const deleteContactMessage = async (req: Request, res: Response) => {
-    // ... (no changes here)
-    try {
-        const contact = await ContactModel.findByIdAndDelete(req.params.id);
-        if (!contact) {
-            return res.status(404).json({ message: "Contact message not found." });
-        }
-        res.status(200).json({ message: "Contact message deleted successfully." });
-    } catch (error: any) {
-        res.status(500).json({ message: "Server Error", error: error.message });
+  // ... (no changes here)
+  try {
+    const contact = await ContactModel.findByIdAndDelete(req.params.id);
+    if (!contact) {
+      return res.status(404).json({ message: "Contact message not found." });
     }
+    res.status(200).json({ message: "Contact message deleted successfully." });
+  } catch (error: any) {
+    res.status(500).json({ message: "Server Error", error: error.message });
+  }
 };

@@ -6,7 +6,9 @@ import studentRoutes from "./src/routes/studentRoutes";
 import blogsRoutes from "./src/routes/blogsRoutes";
 import cors from "cors";
 import companyRoutes from "./src/routes/companyRoutes";
-import contactRoutes from "./src/routes/contactRoutes"
+import contactRoutes from "./src/routes/contactRoutes";
+import departmentStatRoutes from "./src/routes/departmentStatRoutes";
+import placementRoutes from "./src/routes/placementRoutes";
 dotenv.config();
 
 const PORT = process.env.PORT || 5003;
@@ -23,6 +25,8 @@ app.use('/api/students', studentRoutes);
 app.use('/api/blogs', blogsRoutes);
 app.use('/api/companies', companyRoutes);
 app.use('/api/contact', contactRoutes);
+app.use('/api/stats', departmentStatRoutes);
+app.use('/api/placements', placementRoutes);
 
 
 // MongoDB connection
